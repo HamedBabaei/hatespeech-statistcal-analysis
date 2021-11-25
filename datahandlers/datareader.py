@@ -14,7 +14,9 @@ class DataReader:
     """
     @staticmethod
     def load_pkl(path: Path) -> pickle:
-        pass
+        with open(path, "rb") as f:
+            pkl = pickle.load(f)
+        return pkl
 
     @staticmethod
     def load_json(path: Path) -> json:
