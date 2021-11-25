@@ -31,7 +31,7 @@ def twitter_train_model(model: NgramML, config):
 
 
 def twitter_test_model(model: NgramML, config):
-    print(f"TEST TFIDF + LOGSITICREGRESSION MODEL FOR: {config.dataset.upper()}")
+    print(f"TEST TFIDF + ML MODEL FOR: {config.dataset.upper()}")
 
     test_data = eval("DataReader." + config.loader)(path=os.path.join(config.intermediate_train_dir, config.test_name))
     test_data['processed_tweets'] = test_data['tweet'].apply(process_tweet)
@@ -41,7 +41,6 @@ def twitter_test_model(model: NgramML, config):
 
     print("Making a predictions on test set")
     predicts = model.predict(X_test)
-    print("TYPE OF predicts:", type(predicts))
     f1, acc, clf_report = evaluate(gold=y_test,
                                    predicts=predicts,
                                    average='macro')
@@ -49,6 +48,6 @@ def twitter_test_model(model: NgramML, config):
     pprint(report)
     path_to_report = os.path.join(config.logs_dir, config.dataset+"-evaluation-"+config.model_name+".json")
     print(f"Save results with gt and predicts into :{path_to_report}")
-    report["gt"], report['predict'] = list(y_test), list(predicts)
+    report["gt"], report['predict'] = list(y_test), [int(pred) for pred in list(predicts)]
     DataWriter.write_json(report, path_to_report)
 
