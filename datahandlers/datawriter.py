@@ -6,7 +6,6 @@ from pathlib import Path
 import json
 import codecs
 import pickle
-import os
 
 
 class DataWriter:
@@ -15,7 +14,9 @@ class DataWriter:
     """
     @staticmethod
     def write_pkl(data, path: Path):
-        pass
+        '''save pickle data into specified path '''
+        with open(path, "wb") as f:
+            pickle.dump(data, f, protocol=pickle.HIGHEST_PROTOCOL)
 
     @staticmethod
     def write_json(data: json, path: Path):
