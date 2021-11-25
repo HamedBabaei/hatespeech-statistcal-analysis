@@ -1,3 +1,6 @@
+pretrained-model/ml/*
+pretrained-model/bert/*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
