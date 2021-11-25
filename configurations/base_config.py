@@ -50,8 +50,8 @@ class BaseConfig:
         
         # General Model configurations
         self.parser.add_argument("--model_name", type=str, default="ml",
-                                 help='Model name, LogisticRegression or BERT (ml, bert)')
-        self.parser.add_argument("--test", type=bool, default=False,
+                                 help='Model name, ML(SVM) or BERT (ml, bert)')
+        self.parser.add_argument("--test", type=bool, default=True,
                                  help='To do training or testing?')
         self.parser.add_argument("--pre_trained_dir", type=str,
                                  default=os.path.join(Path(__file__).parents[1].__str__(), "pretrained-model"),
@@ -60,15 +60,15 @@ class BaseConfig:
                                  help="Default Seed Num to regenerate results")
 
         # TFIDF + ML Configurations
-        self.parser.add_argument("--ngram_range", type=tuple, default=(1, 2),
+        self.parser.add_argument("--ngram_range", type=tuple, default=(2, 4),
                                  help='N-gram model range')
         self.parser.add_argument("--sublinear_tf", type=bool, default=False,
                                  help='Apply sublinear tf scaling, i.e. replace tf with 1 + log(tf)')
-        self.parser.add_argument("--stop_words", type=str, default="english",
+        self.parser.add_argument("--stop_words", type=str, default=None,#"english",
                                  help='Stop words list, the default is None, means no stop word removings')
-        self.parser.add_argument("--n_estimators", type=int, default=600,
-                                 help='Number of estimators for ML model')
-        
+        self.parser.add_argument("--analyzer", type=str, default="char",  # "english",
+                                 help='Charachter Ngram Model')
+
 
     def get_args(self):
         """
