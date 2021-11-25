@@ -1,1 +1,1 @@
-# hate-speech-diku
+# hate speech
