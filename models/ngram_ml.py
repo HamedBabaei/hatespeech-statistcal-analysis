@@ -24,4 +24,7 @@ class NgramML:
 
     def predict(self, X: list) -> list:
         return self.model.predict(X)
+
+    def get_model(self):
+        return self.model
     

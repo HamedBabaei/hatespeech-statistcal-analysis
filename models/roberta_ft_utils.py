@@ -16,7 +16,6 @@ def process_tweet(tweet):
 
 
 def roberta_twitter_train_model(config, device):
-    print("transformers version:", transformers.__version__)
     def metrics(pred):
         labels = pred.label_ids
         preds = pred.predictions.argmax(-1)
@@ -32,20 +31,28 @@ def roberta_twitter_train_model(config, device):
     print("TRAINING TFIDF + ML MODEL.....")
 
     train_data = eval("DataReader." + config.loader)(path=os.path.join(config.intermediate_train_dir, config.train_name))
+    val_data = eval("DataReader." + config.loader)(path=os.path.join(config.intermediate_train_dir, config.val_name))
     test_data = eval("DataReader." + config.loader)(path=os.path.join(config.intermediate_train_dir, config.test_name))
+
     train_data['tweets'] = train_data['tweet'].apply(process_tweet)
+    val_data['tweets'] = val_data['tweet'].apply(process_tweet)
     test_data['tweets'] = test_data['tweet'].apply(process_tweet)
+
     train_data = train_data.rename(columns={"tweet": "text"})
+    val_data = val_data.rename(columns={"tweet": "text"})
     test_data = test_data.rename(columns={"tweet": "text"})
+
     print(f"Size of the train set is: {train_data.shape[0]}, "
           f"Number of hate speech samples:{sum(train_data['label'].tolist())}")
+    print(f"Size of the validation set is: {val_data.shape[0]}, "
+          f"Number of hate speech samples:{sum(val_data['label'].tolist())}")
     print(f"Size of the test set is: {test_data.shape[0]}, "
           f"Number of hate speech samples:{sum(test_data['label'].tolist())}")
     print("STARTING THE FINE TUNING ROBERTA FOR DOWNSTREAM TASK")
-    #model_path = os.path.join(config.roberta_fine_tune, config.checkpoint)
+
     roberta = RoBERTaHSDetector(model_path=config.roberta_base, tokenizer_path=config.roberta_base,
                                 max_length=config.max_length, device=device)
-    roberta.fine_tune(config, train_data, test_data, metrics)
+    roberta.fine_tune(config, train_data, val_data, test_data, metrics)
     print("ENF OF THE FINE TUNING!")
 
 
@@ -58,7 +65,6 @@ def roberta_twitter_test_model(config, device):
     test_data['tweets'] = test_data['tweet'].apply(process_tweet)
     X_test, y_test = test_data['tweets'].tolist(), test_data['label'].tolist()
 
-    #model_path = os.path.join(config.roberta_fine_tune, config.checkpoint)
     model = RoBERTaHSDetector(model_path=config.roberta_fine_tune, tokenizer_path=config.roberta_fine_tune,
                               max_length=config.max_length, device=device)
     print("Making a predictions on test set")

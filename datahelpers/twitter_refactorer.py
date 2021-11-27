@@ -35,12 +35,16 @@ def twitter(SPAN, config, data_reader, data_writer):
 
     X, y = train_data['tweet'], train_data['label']
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, test_size=0.2, random_state=42)
+
     stats = {
         "all-data": get_stats(y), 
         "train": get_stats(y_train),
+        "validation": get_stats(y_val),
         "test": get_stats(y_test)
         }
     train_df = pd.DataFrame(data={"tweet":X_train, "label":y_train})
+    val_df = pd.DataFrame(data={"tweet": X_val, "label": y_val})
     test_df = pd.DataFrame(data={"tweet":X_test, "label":y_test})
 
     print(f"{SPAN} SAVING INTERMEIDATE DATA'S INTO DIR:{config.intermediate_train_dir}")
@@ -49,6 +53,10 @@ def twitter(SPAN, config, data_reader, data_writer):
     print(f"\t\t SAVING CSV:: {train_data_path}")
     DART_WRITER.write_csv(data=train_df, path=train_data_path)
     
+    val_data_path = os.path.join(config.intermediate_train_dir, "twitter_val.csv")
+    print(f"\t\t SAVING CSV:: {val_data_path}")
+    DART_WRITER.write_csv(data=val_df, path=val_data_path)
+
     test_data_path = os.path.join(config.intermediate_train_dir, "twitter_test.csv")
     print(f"\t\t SAVING CSV:: {test_data_path}")
     DART_WRITER.write_csv(data=test_df, path=test_data_path)
