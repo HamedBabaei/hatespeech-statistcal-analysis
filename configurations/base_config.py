@@ -44,14 +44,10 @@ class BaseConfig:
         self.parser.add_argument("--loader", type=str, default=dataset_config[dataset]['loader'],
                                  help='Loader of the dataset')
         
-        # Representation config and target transformers
-        self.parser.add_argument("--cuda", type=bool, default=True,
-                                 help='Cuda Initializations')
-        
         # General Model configurations
-        self.parser.add_argument("--model_name", type=str, default="ml",
-                                 help='Model name, ML(SVM) or BERT (ml, bert)')
-        self.parser.add_argument("--test", type=bool, default=True,
+        self.parser.add_argument("--model_name", type=str, default="roberta",
+                                 help='Model name, ML(SVM) or BERT (ml, roberta)')
+        self.parser.add_argument("--test", type=bool, default=False,
                                  help='To do training or testing?')
         self.parser.add_argument("--pre_trained_dir", type=str,
                                  default=os.path.join(Path(__file__).parents[1].__str__(), "pretrained-model"),
@@ -66,9 +62,25 @@ class BaseConfig:
                                  help='Apply sublinear tf scaling, i.e. replace tf with 1 + log(tf)')
         self.parser.add_argument("--stop_words", type=str, default=None,#"english",
                                  help='Stop words list, the default is None, means no stop word removings')
-        self.parser.add_argument("--analyzer", type=str, default="char",  # "english",
-                                 help='Charachter Ngram Model')
+        self.parser.add_argument("--analyzer", type=str, default="char",
+                                 help='Character Ngram Model')
 
+        # RoBERTa
+        self.parser.add_argument("--cuda", type=bool, default=True,
+                                 help='Cuda Initializations')
+        self.parser.add_argument("--roberta_base", type=str,
+                                 default="/mnt/disk2/transformers/roberta",
+                                 help='Path to roberta pre-trained model')
+        self.parser.add_argument("--roberta_fine_tune", type=str,
+                                 default="/mnt/disk2/hbmodels/hatespeech-roberta",
+                                 help='Path to fine-tuned version of roberta for the task')
+        self.parser.add_argument("--checkpoint", type=str, default="checkpoint-1000",
+                                 help='Fine-tuned checkpoint')
+        self.parser.add_argument("--max_length", type=int, default=512, help='maximum length')
+        self.parser.add_argument("--save_total_limit", type=int, default=1, help='Save limits')
+        self.parser.add_argument("--batch_size", type=int, default=8, help='Batch Size')
+        self.parser.add_argument("--epoch", type=int, default=3, help='Epoch Number')
+        self.parser.add_argument("--weight_decay", type=float, default=0.0001, help='Weight Decay')
 
     def get_args(self):
         """
