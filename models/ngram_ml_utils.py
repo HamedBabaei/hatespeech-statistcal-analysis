@@ -13,7 +13,7 @@ def process_tweet(tweet):
     return " ".join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])", " ", tweet.lower()).split())
 
 
-def twitter_train_model(model: NgramML, config):
+def ml_twitter_train_model(model: NgramML, config):
     print("TRAINING TFIDF + ML MODEL.....")
 
     train_data = eval("DataReader." + config.loader)(path=os.path.join(config.intermediate_train_dir, config.train_name))
@@ -30,7 +30,7 @@ def twitter_train_model(model: NgramML, config):
     DataWriter.write_pkl(model, path_to_model)
 
 
-def twitter_test_model(model: NgramML, config):
+def ml_twitter_test_model(model: NgramML, config):
     print(f"TEST TFIDF + ML MODEL FOR: {config.dataset.upper()}")
 
     test_data = eval("DataReader." + config.loader)(path=os.path.join(config.intermediate_train_dir, config.test_name))
