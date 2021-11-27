@@ -81,7 +81,7 @@ class BaseConfig:
         self.parser.add_argument("--max_length", type=int, default=512, help='maximum length')
         self.parser.add_argument("--save_total_limit", type=int, default=1, help='Save limits')
         self.parser.add_argument("--batch_size", type=int, default=8, help='Batch Size')
-        self.parser.add_argument("--epoch", type=int, default=2, help='Epoch Number')
+        self.parser.add_argument("--epoch", type=int, default=3, help='Epoch Number')
         self.parser.add_argument("--weight_decay", type=float, default=0.0001, help='Weight Decay')
 
     def get_args(self):

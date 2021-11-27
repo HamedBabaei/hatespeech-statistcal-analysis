@@ -106,17 +106,24 @@ class RoBERTaHSDetector:
         DataWriter.write_json(report, path_to_report)
 
         # Keep track of train and evaluate loss.
-        loss_history = {'train_loss': [], 'eval_loss': [],
-                        "start_step": training_args.logging_steps,
-                        "step_size": training_args.logging_steps}
+        history = {
+            "train_loss": [], "eval_loss": [],
+            "train_f1":[], "eval_f1": [],
+            "start_step": training_args.logging_steps,
+            "step_size": training_args.logging_steps
+        }
         for log_history in self.trainer.state.log_history:
             if 'loss' in log_history.keys():
-                loss_history['train_loss'].append(log_history['loss'])
+                history['train_loss'].append(log_history['loss'])
             elif 'eval_loss' in log_history.keys():
-                loss_history['eval_loss'].append(log_history['eval_loss'])
+                history['eval_loss'].append(log_history['eval_loss'])
+            elif 'f1' in log_history.keys():
+                history['f1'].append(log_history['f1'])
+            elif 'eval_f1' in log_history.keys():
+                history['eval_f1'].append(log_history['eval_f1'])
 
-        path_to_log_report = os.path.join(config.logs_dir, config.dataset + "-loss-" + config.model_name + ".json")
-        DataWriter.write_json(loss_history, path_to_log_report)
+        path_to_log_report = os.path.join(config.logs_dir, config.dataset + "-history-" + config.model_name + ".json")
+        DataWriter.write_json(history, path_to_log_report)
         # Plot Losses.
         # plot_dict(loss_history, start_step=training_args.logging_steps,
         #           step_size=training_args.logging_steps, use_title='Loss',
