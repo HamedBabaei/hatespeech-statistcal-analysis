@@ -33,7 +33,7 @@ if __name__=='__main__':
     kappa(gold=RoBERTa_EVAL['gt'], predict=RoBERTa_EVAL['predict'])
     print("\nML MODEL + RoBERTa")
     kappa(gold=ML_EVAL['predict'], predict=RoBERTa_EVAL['predict'])
-    print("------------------------Phi Voefficient----------------------")
+    print("------------------------Phi Coefficient----------------------")
     print("ML MODEL")
     phi_coefficient(gold=ML_EVAL['gt'], predict=ML_EVAL['predict'])
     print("\nRoBERTa")
