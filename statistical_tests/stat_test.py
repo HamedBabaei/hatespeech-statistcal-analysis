@@ -38,13 +38,16 @@ def McNemar(gold, clf1_preds, clf2_preds):
         print('Different proportions of errors (reject H0)')
 
 
-def confidence_interval(skill, n):
+def confidence_interval(gold, predict):
+    error = sum([1 if gold[i] == predict[i] else 0
+                 for i in range(len(gold))])/len(gold)
+    n = len(gold)
     print("Confidence Interval Test")
     CI = {"90%":1.64, "95%":1.96, "98%":2.33, "99%":2.58}
     F = lambda error, const, n : const * np.sqrt((error * (1 - error)) / n)
     for ci, const in CI.items():
-        print(f"* {ci} likelihood that the CI {[0, F(1-skill, const, n)]} "
-              f"covers the true classification error of the model on unseen data")
+        print(f"* {ci} likelihood that the CI {1-error} +/- {[0, (1-error) + F((1-error), const, n)]} "
+              f"covers the true classification error of the model on unseen data ")
 
 def errors(gold, predict):
     FP = confusion_matrix(gold, predict)[0][1]  # Type I Error
