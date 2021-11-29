@@ -1,3 +1,4 @@
+logs/v1/*
 pretrained-model/ml/*
 pretrained-model/bert/*
 .idea/*
