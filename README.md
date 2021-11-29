@@ -44,14 +44,14 @@
 
 ## Classifier 1: `NgramLSVM`
 
-First, train the model to save the pre-trained model, next use the pretrained model for evaluation.
+First, train the model to save the pre-trained model, next use the pre-trained model for evaluation.
 
-1. To train and save NgramLSVM model (`model hypterparameters avaliable in args, no need to change it.`)
+1. To train and save NgramLSVM model (`model hyperparameters avaliable in args, no need to change it.`)
 
 ```pythonregexp
 python3 ml_runner.py --model_name ml --test False
 ```
-The model will be saved in `pretrained-model/ml/` directory. And 5-fold cross-validation will be performed on train set and logs (results) will be stored in `logs/` directory
+The model will be saved in `pretrained-model/ml/` directory. And 5-fold cross-validation will be performed on the train set and logs (results) will be stored in the `logs/` directory
 
 2. To test on validation and test sets
 ```pythonregexp
@@ -59,11 +59,27 @@ python3 ml_runner.py --model_name ml --test True
 ```
 The model will store the results on validation and test sets in `logs/` dir.
 
+**Configuration script contains more information about inputs: `configuration/base_config.py`**
+
 ## Classifier 2: `RoBERTa`
+1. Fine Tune RoBERTa for the task! The following script will use a train set for RoBERTa Fine-Tuning and after that, it will use validation and test sets for predictions. However, the provided script can load and predict the results!
+```pythonregexp
+python3 bert_runner.py --model_name bert
+```
+The results will be saved in `logs/` directory
 
-
+2. To make prediction over validation and test sets
+```pythonregexp
+python3 bert_runner.py --model_name bert --test True
+```
+**Configuration script contains more information about inputs: `configuration/base_config.py`**
 ## Statistical Analysis
+To perform statistical analysis, `logs/` dir required with results for both classifiers.
 
+```pythonregexp
+python3 statistical_test.py
+```
+**Configuration script contains more information about inputs: `configuration/test_config.py`**
 ## Requirements
 
 * GPU (for fast training of RoBERTa)
