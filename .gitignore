@@ -1,4 +1,4 @@
-logs/v1/*
+logs/old/*
 pretrained-model/ml/*
 pretrained-model/bert/*
 .idea/*
