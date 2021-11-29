@@ -6,6 +6,7 @@ from sklearn.metrics import confusion_matrix, cohen_kappa_score, matthews_corrco
 def McNemar(gold, clf1_preds, clf2_preds):
     """
         McNemar Test
+        contingency table:
                     	Test 2 positive	Test 2 negative	    total
         Test 1 positive	        a	            b	        a + b
         Test 1 negative     	c	            d	        c + d

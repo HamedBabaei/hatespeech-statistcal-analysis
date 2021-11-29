@@ -28,7 +28,7 @@ def roberta_twitter_train_model(config, device):
             'recall': recall
         }
 
-    print("TRAINING TFIDF + ML MODEL.....")
+    print("TRAINING RoBERTa.....")
 
     train_data = eval("DataReader." + config.loader)(path=os.path.join(config.intermediate_train_dir, config.train_name))
     val_data = eval("DataReader." + config.loader)(path=os.path.join(config.intermediate_train_dir, config.val_name))

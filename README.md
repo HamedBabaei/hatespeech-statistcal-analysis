@@ -1,4 +1,8 @@
-# hate speech
+# Hate Speech 
+
+
+
+
 
 #### 1. process.py for twitter (stats, intermediate data)
 #### 2. logisticregression.py to train lr model only

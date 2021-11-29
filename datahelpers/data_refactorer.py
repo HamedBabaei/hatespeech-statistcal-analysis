@@ -8,7 +8,7 @@ from .twitter_refactorer import twitter
 class DataRefactorer:
 
     def __init__(self, config, SPAN="::[DATA REFACTOR]::",
-                 datasets=["twitter", "pan2021"]):
+                 datasets=["twitter"]):
         print(f"[START] {SPAN}")
         self.datasets = datasets
         _ = self.dataset_validator(config.dataset)

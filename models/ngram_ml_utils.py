@@ -1,5 +1,5 @@
 """
-    LR model utils
+    ML model utils
 """
 import os
 from .ngram_ml import NgramML

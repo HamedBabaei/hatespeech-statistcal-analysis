@@ -2,7 +2,6 @@
 Creates processed dataset from twitter for the task
 """
 import os
-from pprint import pprint
 from sklearn.model_selection import train_test_split
 import pandas as pd
 

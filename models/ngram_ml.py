@@ -1,5 +1,5 @@
 """
-    * TFIDF + LogisticRegression Model
+    * TFIDF + LinearSVC Model
     * BERT Model
 """
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -10,7 +10,7 @@ from sklearn.calibration import CalibratedClassifierCV
 
 class NgramML:
     """
-        Modularized Implementation of TFIDF Machine Learning Model
+        Modularized Implementation of TFIDF + LinearSVC Model
     """
     def __init__(self, config):
         self.model = Pipeline([('TFIDF', TfidfVectorizer(ngram_range=config.ngram_range,
