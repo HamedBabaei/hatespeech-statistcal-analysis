@@ -5,34 +5,41 @@
 ```pythonregexp
 
 +configurations/            >> project config files 
-   * __init__.py                  > to make imports easier
-   * base_config.py               > models configs
-   * dataset_config.py            > datahelpers configs
-   * test_config.py               > statistical test configs
++   * __init__.py                  > to make imports easier
++   * base_config.py               > models configs
++   * dataset_config.py            > datahelpers configs
++   * test_config.py               > statistical test configs
 +datahandlers/              >> data reader and writers
-    * __init__.py
-    * datareader.py               > data reader methods
-    * datawriter.py               > data writer methods
++    * __init__.py
++    * datareader.py               > data reader methods
++    * datawriter.py               > data writer methods
 +datahelpers/               >> raw dataset modifier for models
-    * __init__.py     
-    * data_refactorer.py          > main for data modifiers
-    * twitter_refactorer.py       > for our dataset (train, val, test splits)
++    * __init__.py     
++    * data_refactorer.py          > main for data modifiers
++    * twitter_refactorer.py       > for our dataset (train, val, test splits)
 +datasets/                 >> datasets for the project
-    * twitter                     > our dataset
-        - raw                        > raw dataset wihtout modification
-        - intermediate               > train, val, test sets dir 
++    * twitter                     > our dataset
++        - raw                        > raw dataset wihtout modification
++        - intermediate               > train, val, test sets dir 
 +imagse/                   >> images and plots
 +logs/                     >> model outputs and results
 +models/                   >> models scripts
-    * __init__.py
-    * evaluation.py                 > evaluation metrics
-    * ngram_ml.py                   > modularized NgramLSVM model
-    * ngram_ml_utils.py             > NgramLSVM interface
-    * roberta_ft.py                 > modularized RoBERTa model for fine-tuning and evaluation setups
-    * roberta_ft_utils.py           > RoBERTa interface
-+notebooks/
-+statistical_tests/
-
++    * __init__.py
++    * evaluation.py                 > evaluation metrics
++    * ngram_ml.py                   > modularized NgramLSVM model
++    * ngram_ml_utils.py             > NgramLSVM interface
++    * roberta_ft.py                 > modularized RoBERTa model for fine-tuning and evaluation setups
++    * roberta_ft_utils.py           > RoBERTa interface
++notebooks/               >> jupyter notebook files
++statistical_tests/       >> statistical test methods
++    * __init__.py
++    * stat_test.py
++
++ bert_runner.py        >> main script to call for using RoBERTa model
++ ml_runner.py          >> main script to call for using NgramLSVM model
++ process.py            >> main script that uses datahelpers to create train,test, vals
++ requirements.txt      >> python libraries for the project
++ statistical_test.py   >> main script that runs statistical test automatically
 ```
 
 ## Classifier 1: `NgramLSVM`
