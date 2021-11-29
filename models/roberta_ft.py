@@ -6,8 +6,6 @@ from transformers import Trainer, TrainingArguments
 import datasets
 import numpy as np
 from pprint import pprint
-from tqdm import tqdm
-import torch
 import os
 from datahandlers import DataWriter
 from .evaluation import evaluate
@@ -124,14 +122,9 @@ class RoBERTaHSDetector:
 
         path_to_log_report = os.path.join(config.logs_dir, config.dataset + "-history-" + config.model_name + ".json")
         DataWriter.write_json(history, path_to_log_report)
-        # Plot Losses.
-        # plot_dict(loss_history, start_step=training_args.logging_steps,
-        #           step_size=training_args.logging_steps, use_title='Loss',
-        #           use_xlabel='Train Steps', use_ylabel='Values', magnify=2)
 
 
-
-    def __predict(self, X:str, proba:bool = False):
+    def _predict(self, X:str, proba:bool = False):
         inputs = self.roberta_tokenizer(X, return_tensors="pt").to(self.device)
         outputs = self.roberta_model(**inputs)
         logits = outputs.logits
@@ -147,15 +140,3 @@ class RoBERTaHSDetector:
         test_dataset = SimpleDataset(tokenized_texts)
         predictions = trainer.predict(test_dataset)
         return predictions.predictions.argmax(-1)
-
-    def predict2(self, X:list):
-        preds = []
-        self.roberta_model.eval()
-        for x in tqdm(X):
-            tokenized_texts = self.roberta_tokenizer([x], padding=True, truncation=True)
-            pt_inputs = {k: torch.tensor(v).to(self.device) for k, v in tokenized_texts.items()}
-            with torch.no_grad():
-                output = self.roberta_model(**pt_inputs)
-            predictions = output.logits.cpu().numpy()
-            preds.append(predictions.argmax(-1)[0])
-        return preds
