@@ -1,4 +1,11 @@
-# Hate Speech 
+# Hate Speech Detection
+Hate speech (HS) in social media such as Twitter is a complex phenomenon that attracted a significant body of research in the NLP. In this repository, we investigated two different models for HS detection over Twitter data. Then we did evaluations to compare two models from statistical view. General we used:
+* `Accuracy` to report the overall accuracy of the models.
+* `F1 score` because of the imbalanced classes in the data, roughly 7% of the data are positive examples. Our main metric is F1 score because it reflects the balance between recall and precision
+• `Error Confidence Intervals` metric to measure the robustness of our predictions and enable us to predict the behavior of our models in terms of generalization.
+• `McNemar Test` to examine the significance of the difference between predictions of our models.
+
+
 
 ## Directory Structures
 
@@ -87,3 +94,26 @@ python3 statistical_test.py
 * Linux
 * Python libraries (exist in requirements.txt)
 
+-----------------------------
+
+
+## Citation
+If you find this repository useful please cite one of our works as:
+
+Giglou, H. B., Rahgooy, T., Razmara, J., Rahgouy, M., & Rahgooy, Z. (2021). Profiling Haters on Twitter using Statistical and Contextualized Embeddings. In CLEF (Working Notes) (pp. 1813-1821).
+
+or bibtex
+
+```bibtex
+@InProceedings{giglou2021,
+  author =              {{Hamed Babaei} Giglou and Taher Rahgooy and Jafar Razmara Mostafa Rahgouy and Zahra Rahgooy},
+  booktitle =           {{CLEF 2021 Labs and Workshops, Notebook Papers}},
+  crossref =            {pan:2021},
+  editor =              {Guglielmo Faggioli and Nicola Ferro and Alexis Joly and Maria Maistro and Florina Piroi},
+  month =               sep,
+  publisher =           {CEUR-WS.org},
+  title =               {{Profiling Haters on Twitter using Statistical and Contextualized Embeddings---Notebook for PAN at CLEF 2021}},
+  url =                 {http://ceur-ws.org/Vol-2936/paper-154.pdf},
+  year =                2021
+}
+```
