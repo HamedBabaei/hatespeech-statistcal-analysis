@@ -98,7 +98,7 @@ python3 statistical_test.py
 
 
 ## Citation
-If you find this repository useful please cite one of our works as:
+If you find this repository useful in your scientific work please cite our works as:
 
 Giglou, H. B., Rahgooy, T., Razmara, J., Rahgouy, M., & Rahgooy, Z. (2021). Profiling Haters on Twitter using Statistical and Contextualized Embeddings. In CLEF (Working Notes) (pp. 1813-1821).
 
