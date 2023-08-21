@@ -117,3 +117,14 @@ or bibtex
   year =                2021
 }
 ```
+or if you are using codes please cite this repository as following:
+```
+@software{Babaei_Giglou_Hate_Speech_Analysis_2022,
+    author = {Babaei Giglou, Hamed},
+    month = jul,
+    title = {{Hate Speech Analysis}},
+    url = {https://github.com/HamedBabaei/hatespeech-statistcal-analysis},
+    version = {1.0.0},
+    year = {2022}
+}
+```
