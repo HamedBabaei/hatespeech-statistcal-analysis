@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this repository in your works, please cite it below."
+authors:
+- family-names: "Babaei Giglou"
+  given-names: "Hamed"
+  orcid: "https://orcid.org/0000−0003−3758−1454"
+title: "Hate Speech Analysis"
+version: 1.0.0
+date-released: 2022-07-03
+url: "https://github.com/HamedBabaei/hatespeech-statistcal-analysis"
